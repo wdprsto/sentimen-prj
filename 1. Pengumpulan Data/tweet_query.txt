@@ -1,0 +1,3 @@
+1. (prj OR "jakarta fair") lang:id since:2023-07-08 -filter:replies -filter:media -wts -wtb -filter:links
+2. (#prj OR #JakartaFair) lang:id since:2023-03-01 -filter:replies -filter:media -wts -wtb -filter:links
+3. #JakartaFair2023 lang:id since:2023-03-01 -filter:replies -filter:media -wts -wtb -filter:links
