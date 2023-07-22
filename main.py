@@ -16,7 +16,7 @@ style = """
     #MainMenu {visibility: hidden;}
     header {visibility: hidden;}
     footer {visibility: hidden;}
-    [class*='viewerBadge_container'] {visibility: hidden;}
+    a[class^='viewerBadge_container'] {visibility: hidden;}
 
 <style>
 """
