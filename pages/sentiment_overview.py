@@ -34,6 +34,7 @@ if len(date)==1:
 date[1] = date[1] + datetime.timedelta(days=1)
 data = pd.read_csv('data/labeled.csv').drop(['Unnamed: 0'], axis=1)
 data['like'] = data['like'].replace({'undefined':0}).astype(int)
+data['status'] = data['status'].astype(str)
 data['time'] = data['time'].apply(lambda x: x[:10])
 data['interaction'] = data.apply(lambda x: x['like']+x['reply']+x['retweet'], axis=1)
 
