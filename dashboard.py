@@ -35,7 +35,9 @@ data['time'] = data['time'].apply(lambda x: x[:10])
 data['interaction'] = data.apply(lambda x: x['like']+x['reply']+x['retweet'], axis=1)
 
 # FOR SENTIMENT
-df_sentiment = pd.DataFrame(data['prediction'].value_counts()).rename({'prediction':'total'}, axis=1)
+df_sentiment = pd.DataFrame(data['prediction'].value_counts()).rename({'prediction':'total',
+                                                                       'count':'total'}, axis=1)
+# df_sentiment.columns = [['total', df_sentiment.columns[-1]]]
 df_sentiment['sentiment'] = ['Positive','Negative']
 
 # FOR TWEET NUMBER
