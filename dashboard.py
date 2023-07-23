@@ -5,8 +5,6 @@ import seaborn as sns
 import streamlit as st
 from babel.numbers import format_currency
 from numerize import numerize
-from wordcloud import WordCloud
-from textwrap import wrap
 from helper import generate_wordcloud
 
 import datetime
@@ -134,8 +132,8 @@ with a21:
 with a22:
     "Sentimen Pengguna"
     fig = px.pie(df_sentiment, 
-            'sentiment', #names
-            'total', #values
+            names='sentiment',
+            values='total',  
             # title='Sentiment Pengguna',
             hole=.3,
             height=300
