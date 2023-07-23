@@ -134,7 +134,8 @@ with a21:
 with a22:
     "Sentimen Pengguna"
     fig = px.pie(df_sentiment, 
-            values='total', names='sentiment', 
+            'sentiment', #names
+            'total', #values
             # title='Sentiment Pengguna',
             hole=.3,
             height=300
