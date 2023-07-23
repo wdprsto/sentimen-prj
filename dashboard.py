@@ -5,13 +5,9 @@ import seaborn as sns
 import streamlit as st
 from babel.numbers import format_currency
 from numerize import numerize
-from helper import generate_wordcloud
+from helper import generate_wordcloud, add_logo
 
-import datetime
 import plotly.express as px
-
-
-
 
 st.set_page_config(page_title="Sentimen Pekan Raya Jakarta 2023",
                    page_icon="📈",
@@ -53,28 +49,7 @@ df_tweet.columns = [col[0] if col[1] == '' else col[0] + '_' + col[1] for col in
 #         "Pilih Sentimen",
 #         ['Positif', 'Negatif']
 #     )
-
-today = datetime.datetime.now()
-past_3m = datetime.date(today.year, today.month-3, 1)
-
-date = list(
-    st.sidebar.date_input(
-    "Masukkan rentang waktu",
-    (past_3m, 
-     today),
-    datetime.date(today.year-10, 1, 1), #maxval
-    datetime.date(today.year+10, 12, 31), #minval
-    )
-)
-
-# handling the date
-if len(date)==1:
-    date.append(date[0] + datetime.timedelta(days=1))
-date[1] = date[1] + datetime.timedelta(days=1)
-
-with st.sidebar:
-    pass
-
+add_logo("https://stis.ac.id/media/source/up.png",40)
 
 # TITLE
 "# Analisis Sentimen Agenda Pekan Raya Jakarta Tahun 2023"
@@ -149,8 +124,7 @@ with a22:
         use_container_width=True
     )
 
-"## Sampel Dataset"
-st.dataframe(data[(data['time'] >= str(date[0])) & (data['time'] <= str(date[1]))])
+
 
 
 
