@@ -5,7 +5,7 @@ import pandas as pd
 from helper import add_logo
 import plotly.express as px
 
-st.set_page_config(page_title="Overview", 
+st.set_page_config(page_title="Sentiment Overview", 
                    page_icon="📈",
                    layout="wide")
 
@@ -31,6 +31,7 @@ df_tweet = data.groupby(["time","prediction"]).agg({
                         }).reset_index()
 df_tweet.columns = [col[0] if col[1] == '' else col[0] + '_' + col[1] for col in df_tweet.columns]
 
+plotly_colors = ['red', '#636EFA'] # atur warna linechartnya agar sesuai denan warna di pie
 
 # SIDEBAR
 # st.sidebar.header("Sentiment")
@@ -70,7 +71,8 @@ with a11:
             values='total',  
             # title='Sentiment Pengguna',
             hole=.3,
-            height=300
+            height=300,
+            color_discrete_sequence=plotly_colors[::-1]
             ) 
     fig.update_traces(textposition='inside', textinfo='percent+label', textfont_size=18,)
     fig.update_layout(showlegend=False,
@@ -83,7 +85,6 @@ with a11:
     )
 
 with a12:
-    plotly_colors = ['red', '#636EFA'] # atur warna linechartnya agar sesuai denan warna di pie
     
     fig = px.line(df_tweet, x='time', y='like_sum', color='prediction',
              hover_data=['like_sum', 'reply_sum', 'retweet_sum'], 
