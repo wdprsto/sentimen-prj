@@ -35,7 +35,7 @@ plotly_colors = ['red', '#636EFA'] # atur warna linechartnya agar sesuai denan w
 
 # SIDEBAR
 # st.sidebar.header("Sentiment")
-add_logo("https://stis.ac.id/media/source/up.png",40)
+add_logo("https://upload.wikimedia.org/wikipedia/commons/archive/c/ce/20210909091155%21Twitter_Logo.png",40)
 
 today = datetime.datetime.now()
 past_3m = datetime.date(today.year, today.month-3, 1)
@@ -105,10 +105,12 @@ with a12:
 
 "## Sampel Tweet"
 st.dataframe(data[(data['time'] >= str(date[0])) & (data['time'] <= str(date[1]))]\
-                [['username','text','time','prediction','retweet','like','reply','tweet_link']],
+                [['username','text','time','prediction','retweet','like','reply','tweet_link']].\
+                    sort_values(['like'],ascending=False),
             use_container_width=True,
             column_config={
                 'prediction':'sentiment',
                 'tweet_link':st.column_config.LinkColumn("tweet_link")
-            }
+            },
+            hide_index=True
              )

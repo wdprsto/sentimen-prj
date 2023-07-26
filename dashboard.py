@@ -49,7 +49,7 @@ df_tweet.columns = [col[0] if col[1] == '' else col[0] + '_' + col[1] for col in
 #         "Pilih Sentimen",
 #         ['Positif', 'Negatif']
 #     )
-add_logo("https://stis.ac.id/media/source/up.png",40)
+add_logo("https://upload.wikimedia.org/wikipedia/commons/archive/c/ce/20210909091155%21Twitter_Logo.png",40)
 
 # TITLE
 "# Analisis Sentimen Agenda Pekan Raya Jakarta Tahun 2023"

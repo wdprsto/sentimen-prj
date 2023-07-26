@@ -44,4 +44,4 @@ def add_logo(logo_url: str, height: int = 120):
     )
 
 
-# st.markdown('<img style="text-align:center;max-width:100%;padding-bottom:32px" src="https://stis.ac.id/media/source/up.png">', unsafe_allow_html=True)
+# st.markdown('<img style="text-align:center;max-width:100%;padding-bottom:32px" src="https://upload.wikimedia.org/wikipedia/commons/archive/c/ce/20210909091155%21Twitter_Logo.png">', unsafe_allow_html=True)

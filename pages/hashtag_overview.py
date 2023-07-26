@@ -36,7 +36,7 @@ df_tweet.sort_values(by=['interaction_sum'], ascending=False, inplace=True)
 
 # SIDEBAR
 # st.sidebar.header("Sentiment")
-add_logo("https://stis.ac.id/media/source/up.png",40)
+add_logo("https://upload.wikimedia.org/wikipedia/commons/archive/c/ce/20210909091155%21Twitter_Logo.png",40)
 
 today = datetime.datetime.now()
 past_3m = datetime.date(today.year, today.month-3, 1)
@@ -56,15 +56,15 @@ if len(date)==1:
     date.append(date[0] + datetime.timedelta(days=1))
 
 date[1] = date[1] + datetime.timedelta(days=1)
-data2 = data.groupby(["hashtag","time"]).agg({
-                        'like':['count','sum'],
+data2 = data.groupby(["time"]).agg({
+                        'hashtag':['nunique','unique'],
+                        'like':['sum'],
                         'reply' : ['sum'],
                         'retweet' : ['sum'],
                         'interaction' : ['sum'],
-                        'username':['nunique']
                         }).reset_index()
 data2.columns = [col[0] if col[1] == '' else col[0] + '_' + col[1] for col in data2.columns]
-st.dataframe(data2)
+
 
 # sentimen
 a11, a12 = st.columns(2)
@@ -89,25 +89,36 @@ with a11:
         )
 
 with a12:
-    pass
-    # plotly_colors = ['red', '#636EFA'] # atur warna linechartnya agar sesuai denan warna di pie
-    
-    # fig = px.line(df_tweet, x='time', y='like_sum', color='prediction',
-    #          hover_data=['like_sum', 'reply_sum', 'retweet_sum'], 
-    #          labels={'like_sum':'like',
-    #                  'reply_sum':'reply',
-    #                  'retweet_sum':'retweet',
-    #                  'prediction':'sentiment'},
-    #         height=400,
-    #         color_discrete_sequence=plotly_colors
-    #         )
-    # fig.update_yaxes(visible=False, fixedrange=True)
-    # fig.update_layout(showlegend=False)
+    fig = px.line(data2, x='time', y='hashtag_nunique', 
+            hover_data=['like_sum', 'reply_sum', 'retweet_sum'],
+             labels={'like_sum':'like',
+                     'reply_sum':'reply',
+                     'retweet_sum':'retweet',
+                     'prediction':'sentiment',
+                     'hashtag_nunique':'unique hashtag'},
+            height=400,
+            )
+    fig.update_yaxes(visible=False, fixedrange=True)
+    fig.update_layout(showlegend=False)
 
-    # st.plotly_chart(
-    #     fig,
-    #     use_container_width=True
-    # )
+    st.plotly_chart(
+        fig,
+        use_container_width=True
+    )
+st.dataframe(data2,
+             hide_index=True,
+            column_config={
+                'hashtag':'Hashtag',
+                'like_count':"Tweets",
+                'like_sum':'Likes',
+                'reply_sum':'Replies',
+                'retweet_sum':'Retweets',
+                'interaction_sum':'Engagement',
+                'username_nunique':'User',
+                'hashtag_nunique':'Total Hashtag',
+                'hashtag_unique':'Unique Hashtag'
+            },
+            use_container_width=True)
 
 "## Hashtag Details"
 # st.dataframe(data[(data['time'] >= str(date[0])) & (data['time'] <= str(date[1]))]\
@@ -128,6 +139,6 @@ st.dataframe(df_tweet[['hashtag','like_count','username_nunique','retweet_sum','
                 'reply_sum':'Replies',
                 'retweet_sum':'Retweets',
                 'interaction_sum':'Engagement',
-                'username_nunique':'User'
+                'username_nunique':'User',
 
             })
