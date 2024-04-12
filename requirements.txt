@@ -1,0 +1,11 @@
+plotly
+yfinance
+numerize
+numpy 
+pandas 
+scipy 
+matplotlib 
+seaborn
+babel
+wordcloud
+sastrawi
